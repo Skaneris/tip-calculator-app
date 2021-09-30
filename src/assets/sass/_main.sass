@@ -6,11 +6,20 @@
     max-width: 375px
     background: $white
     border-radius: 0.8rem
-    &__left
     &__buttons
         display: flex
         justify-content: space-between
         align-items: stretch
         flex-wrap: wrap
         gap: 14px
-    &__right
+    @media screen and ( min-width: 800px )
+        display: flex
+        max-width: 750px
+        grid-gap: 1.5rem
+        &__left
+            flex: 0 0 304px
+        &__right
+            flex: 1 0 auto
+            display: flex
+            flex-direction: column
+        

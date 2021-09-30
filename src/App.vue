@@ -23,7 +23,7 @@
                 </div>
                 <div class="value">${{ tip }}</div>
             </div>
-            <div class="calculator_res_row">
+            <div class="calculator_res_row _last">
                 <div class="title">
                     <p>Total</p>
                     <span>/ person</span>
@@ -147,4 +147,8 @@ export default {
         cursor: pointer
         &:hover
             background: lighten(hsl(172, 67%, 45%), 26)
+    @media screen and (min-width: 800px)
+        ._last
+            flex: 1 0 auto
+            align-items: flex-start
 </style>
