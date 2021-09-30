@@ -2,17 +2,18 @@
     <img class="logo" src="./assets/images/logo.svg" alt="Logo">
     <div class="calculator">
         <div class="calculator__left">
-            <InputText label="Bill" icon="money" @inputChange="setBill" />
+            <InputText label="Bill" icon="money" />
             <div class="clculator__tips">
                 <div class="label">Select Tip %</div>
                 <div class="calculator__buttons">
                     <NumeredButton v-for="val of buttons" :buttonValue="val" :key="val" 
-                        :class="{active: activeValue === val}"
-                        @buttonClick="setActiveValue" />
-                    <NumeredButton title="Custom" class="custom" @buttonClick="setActiveValue" />
+                        :class="{active: persent === val}"
+                        @buttonClick="setPersent" />
+                    <input ref="input" v-if="custom" class="custom-input" type="text" v-model="persent" @input="setCustomPersent">
+                    <NumeredButton v-else title="Custom" class="custom" @buttonClick="setCustom" />
                 </div>
             </div>
-            <InputText label="Number of Piople" icon="person" @inputChange="setPiople" />
+            <InputText label="Number of Piople" icon="person" />
         </div>
         <div class="calculator__right">
             <div class="calculator_res_row">
@@ -29,42 +30,64 @@
                 </div>
                 <div class="value">${{ total }}</div>
             </div>
-            <button class="reset" @click="log">Reset</button>
+            <button class="reset" @click="reset">Reset</button>
         </div>
     </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 export default {
     name: 'App',
     setup() {
-        const bill = ref(0)
-        const piople = ref(0)
-        const activeValue = ref(0)
+        const store = useStore()
+        const input = ref(null)
 
-        const setBill = value => bill.value = Number(value)
-        const setPiople = value => piople.value = Number(value)
+        const persent = ref(0)
+        const custom = ref(false)
+
         const buttons = [5, 10, 15, 25, 50]
-        const setActiveValue = val => activeValue.value = val
+        const setPersent = val => {
+            custom.value = false
+            persent.value = val
+        }
+
+        const setCustom = val => {
+            persent.value = val
+            custom.value = true
+            setTimeout(() => input.value.focus(), 0)
+        }
+        const setCustomPersent = ev => {
+            const val = Number(ev.target.value.match(/\d{1,4}/))
+            if(val < 0) val = 0
+            ev.target.value = val
+        }
 
         const tip = computed(() => {
-            if(piople.value === 0) return "0.00"
-            const res = bill.value * activeValue.value / piople.value / 100
+            if(store.state.piople === 0) return "0.00"
+            const res = store.state.bill * persent.value / store.state.piople / 100
             if(res > 0) return res.toFixed(2)
             return "0.00"
         })
 
         const total = computed(() => {
-            if(piople.value === 0) return "0.00"
-            const res = (bill.value * activeValue.value / 100 + bill.value) / piople.value
+            if(store.state.piople === 0) return "0.00"
+            const res = (store.state.bill * persent.value / 100 + store.state.bill) / store.state.piople
             if(res > 0) return res.toFixed(2)
             return "0.00"
         })
 
-        const log = () => console.log({bill: bill.value, piople: piople.value})
+        const reset = () => {
+            persent.value = 0
+            custom.value = false
+            store.state.bill = 0
+            store.state.piople = 0
+        }
+
         return {
-            log, buttons, setBill, setPiople, setActiveValue, activeValue, tip, total
+            input, buttons, setPersent,
+            persent, tip, total, custom, setCustomPersent, setCustom, reset,
         }
     }
 }
@@ -75,6 +98,15 @@ export default {
     padding: 0 0.3rem   
 .clculator__tips
     margin: 0 0 1.5rem 0
+    .custom-input
+        width: 136px
+        height: 44px
+        font-size: 1rem
+        font-weight: 600
+        text-align: center
+        border: 2px solid hsl(172, 67%, 45%)
+        border-radius: 0.2rem
+        outline: none
 .label
     margin: 0 0 0.5rem 0
     font-size: 0.64rem
