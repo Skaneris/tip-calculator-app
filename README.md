@@ -28,7 +28,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX/hub/tip-calculator-app-sass-flexbox-mobilefirst-workflow-vue-Ny4edCPDM](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX/hub/tip-calculator-app-sass-flexbox-mobilefirst-workflow-vue-Ny4edCPDM)
 - Live Site URL: [http://www.to-var.com/tip-calculator-app/](http://www.to-var.com/tip-calculator-app/)
 
 ## My process
