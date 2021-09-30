@@ -8,26 +8,21 @@ const store = createStore({
         }
     },
     mutations: {
-        setBill: (state, value) => {
-            if(state.bill === value) {
-                state.bill = 1    
-            }
-            state.bill = value
-        },
-        setPiople: (state, value) => {
-            if(value === "0" || value.length === 0) state.piople = 1; state.piople = 0
-            state.piople = Number(value)
-        },
+        setBill: (state, value) => state.bill = value,
+        setPiople: (state, value) => state.piople = value,
     },
     actions: {
         bill({commit}, val) {
-            val = val.replace(/[^\d\.]/g, '')
-            commit('setBill', Number(val))
+            if(!(/^(?=.*\d)\d*(?:\.\d{0,2})?$/).test(val)) {
+                val = val.substr(0, val.length - 1)
+            }
+            val = (val.length === 0 || val == "0") ? 0 : Number(val)
+            commit('setBill', val)
         },
         piople({commit}, val) {
-            let value = val.replace(/[^\d]/g, '')
-            if(value.length === 0) value = 0
-            commit('setPiople', value)
+            val = val.replace(/\D/g, '')
+            val = (val.length === 0 || val == "0") ? 0 : Number(val)
+            commit('setPiople', val)
         }
     }
 })
