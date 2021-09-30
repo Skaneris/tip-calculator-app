@@ -29,7 +29,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX/hub/tip-calculator-app-sass-flexbox-mobilefirst-workflow-vue-Ny4edCPDM](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX/hub/tip-calculator-app-sass-flexbox-mobilefirst-workflow-vue-Ny4edCPDM)
-- Live Site URL: [http://www.to-var.com/tip-calculator-app/](http://www.to-var.com/tip-calculator-app/)
+- Live Site URL: [https://skaneris.github.io/tip-calculator-dist/](https://skaneris.github.io/tip-calculator-dist/)
 
 ## My process
 
