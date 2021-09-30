@@ -1,7 +1,7 @@
 <template>
     <div class="input-text">
         <div class="input-label">
-            <span>{{ label }}</span>
+            <label>{{ label }}</label>
             <span v-if="isZerro" class="error-msg">Can't be zerro</span>
         </div>
         <div class="input-wrapper">
@@ -77,6 +77,8 @@ export default {
 <style lang="sass" scoped>
 .input-text
     margin: 0 0 1.5rem 0
+    @media screen and ( min-width: 800px )
+        margin: 0 0 1rem 0
 .input-label
     margin: 0 0 0.5rem 0
     font-size: 0.6rem

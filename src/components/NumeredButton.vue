@@ -54,5 +54,7 @@ button
         background: hsl(189, 41%, 97%)
         &:hover
             border: 2px solid lighten(hsl(172, 67%, 45%), 20)
+    @media screen and ( min-width: 800px )
+        flex: 1 1 30%
             
 </style>
