@@ -12,13 +12,15 @@
             <input type="text" :class="{ error: isZerro}" v-model="ipt"
                 :id="icon"
                 @input="validation"
-                @focus="setFocus"
-                @mouseup="setFocusEnd">
+                @click="setFocusEnd"
+                autocomplete="off">
         </div>
     </div>
 </template>
 
 <script>
+import { toRef, computed, ref, wat } from 'vue'
+import { useStore } from 'vuex'
 export default {
     name: 'InputText',
     props: {
@@ -30,16 +32,33 @@ export default {
             default: ''
         }
     },
-    setup() {
-        const setFocus = ev => {
-            ev.preventDefault()
-        }
+    setup(props) {
+
+        const store = useStore()
+        const icon = toRef(props, 'icon')
+        const ipt = computed({
+            get: () => {
+                if(icon.value === 'money') return store.state.bill
+                if(icon.value === 'person') return store.state.piople
+            },
+            set: (val) => {
+                if(icon.value === 'money') store.dispatch('bill', val)
+                if(icon.value === 'person') store.dispatch('piople', val)
+            }
+        })
+
         const setFocusEnd = ev => {
             ev.preventDefault()
             ev.target.setSelectionRange(-1, -1)
         }
+
+        const isZerro = computed(() => {
+            if(store.state.bill === 0 && icon.value === 'money' || store.state.piople === 0 && icon.value === 'person') return true
+            return false
+        })
+
         return {
-            setFocus, setFocusEnd,
+            setFocusEnd, ipt, isZerro
         }
     },
     methods: {
@@ -56,22 +75,6 @@ export default {
             }
         }
     },
-    computed: {
-        ipt: {
-            get() {
-                if(this.icon === 'money') return this.$store.state.bill
-                if(this.icon === 'person') return this.$store.state.piople
-            },
-            set(val) {
-                if(this.icon === 'money') this.$store.dispatch('bill', val)
-                if(this.icon === 'person') this.$store.dispatch('piople', val)
-            }
-        },
-        isZerro(){
-            if(this.$store.state.bill === 0 && this.icon === 'money' || this.$store.state.piople === 0 && this.icon === 'person') return true
-            return false
-        }
-    }
 }
 </script>
 

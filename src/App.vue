@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <img class="logo" src="./assets/images/logo.svg" alt="Logo" role="banner">
+        <img class="logo" src="./assets/images/logo.svg" alt="Logo" role="logo">
         <div class="calculator" role="main">
             <div class="calculator__left">
                 <InputText label="Bill" icon="money" />
