@@ -57,24 +57,23 @@ export default {
             return false
         })
 
-        return {
-            setFocusEnd, ipt, isZerro
-        }
-    },
-    methods: {
-        validation(ev) {
+        const validation = ev => {
             ev.target.value = ev.target.value.replace(/^00/, '0')
-            if(this.icon === 'money'){
+            if(icon.value === 'money'){
                 if(!(/^(?=.*\d)\d*(?:\.\d{0,2})?$/).test(ev.target.value)) {
                     ev.target.value = ev.target.value.substr(0, ev.target.value.length - 1)
                 }
             }
-            if(this.icon === 'person'){
+            if(icon.value === 'person'){
                 ev.target.value = ev.target.value.replace(/\D/g, '')
                 if(ev.target.value.length === 0) ev.target.value = "0"
             }
         }
-    },
+
+        return {
+            setFocusEnd, ipt, isZerro, validation
+        }
+    }
 }
 </script>
 

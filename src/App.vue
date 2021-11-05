@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 export default {
     name: 'App',
@@ -88,8 +88,8 @@ export default {
         }
 
         return {
-            input, buttons, setPersent,
-            persent, tip, total, custom, setCustomPersent, setCustom, reset,
+            buttons, setPersent, input,
+            persent, tip, total, custom, setCustomPersent, setCustom, reset
         }
     }
 }
